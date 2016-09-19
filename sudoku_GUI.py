@@ -1,13 +1,4 @@
-"""
-
-Made By Harshit Sidhwa
-
-"""
-
-
-
-from Tkinter import *
-import tkMessageBox
+from tkinter import *
 entries = []
 
 def initialize(top,arr):
@@ -79,6 +70,7 @@ def solve_sudoku(arr):
 def createGUI(maze):
     top = Tk()
     top.title("Sudoku Solver")
+    top.resizable(0,0)
     canvas = Canvas(top, height=320, width =350)
     createRow(canvas)
     createCol(canvas)
@@ -89,7 +81,7 @@ def createGUI(maze):
     
 def createButtons(top,maze):
     button_solve = Button(top, text="Solve", justify='left', default='active', command = lambda: play_Game(top,maze))
-    button_reset = Button(top, text="reset", justify='right', command = lambda: clean_Mess())
+    button_reset = Button(top, text="Reset", justify='right', command = lambda: clean_Mess())
     button_solve.place(x=70, y=275, height=30, width=60)
     button_reset.place(x=230, y=275, height=30, width=60)
     
@@ -104,13 +96,13 @@ def play_Game(top,maze):
     else:
         #tkMessageBox.showinfo("ERROR", "No solution found")
         #clean_Mess()
-        print "No solution found"
+        print ("No solution found")
     
 def createEntry(top):
     p,q=41.4,41.4
     for i in range(9):
         for j in range(9):
-            E = Entry(top, width=3, font = 'BOLD')
+            E = Entry(top, width=3, font = 'BOLD',justify="center",relief="flat",fg="green")
             E.grid(row=i, column=j)
             E.place(x=p, y=q, height=20, width=25)
             entries.append(E)
@@ -124,9 +116,9 @@ def createRow(canvas):
     q=260
     for m in range(10):
         if(m%3==0):
-            canvas.create_line(i,j,p,q,width=2.5)
+            canvas.create_line(i,j,p,q,width=4,fill="brown")
         else:
-            canvas.create_line(i,j,p,q,width=2)
+            canvas.create_line(i,j,p,q,width=1)
         i+=30
         p+=30
     
@@ -134,7 +126,10 @@ def createCol(canvas):
     i,j=40,40
     p,q=310,40
     for m in range(10):
-        canvas.create_line(i,j,p,q,width=2.3)
+        if(m%3==0):
+            canvas.create_line(i,j,p,q,width=4,fill="brown")
+        else:
+            canvas.create_line(i,j,p,q,width=1)
         j+=24.5
         q+=24.5
 
